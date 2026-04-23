@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Sistema Corrida F1</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <nav class="nav">
+      <div class="logo">🏎️ F1 SYSTEM</div>
+      <button class="hamburger" aria-label="Toggle Menu" onclick="toggleMenu()">☰</button>
+      <ul class="nav-links">
+        <li><a href="dashboard.html">📊 Dashboard</a></li>
+        <li><a href="cadastro-usuarios.html">👤 Usuários</a></li>
+        <li><a href="cadastro-corredores.html">🏁 Corredores</a></li>
+        <li><a href="registro-voltas.html">⏱️ Voltas</a></li>
+        <li><a href="ranking.html">🏆 Ranking</a></li>
+        <li><a href="podio.html">🥇 Pódio</a></li>
+        <li><a href="#" onclick="logout()">🚪 Sair</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h1 style="text-align: center; margin: 2rem 0 3rem; font-size: 3rem; background: linear-gradient(45deg, #ff1744, #ff9100); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+      Painel de Controle F1 🏎️
+    </h1>
+
+    <div class="stats-grid" id="stats">
+      <!-- Stats serão carregados via JS -->
+    </div>
+
+    <div class="podio" id="podioDashboard">
+      <!-- Pódio será carregado via JS -->
+    </div>
+  </div>
+
+  <script src="../js/api.js"></script>
+  <script src="../js/dashboard.js"></script>
+</body>
+</html>
+
+<script>
+function logout() {
+  localStorage.removeItem('f1_user');
+  window.location.href = 'login.html';
+}
+
+function toggleMenu() {
+  document.querySelector('.nav-links').classList.toggle('active');
+}
+</script>

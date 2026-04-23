@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ranking - F1 System</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <nav class="nav">
+      <div class="logo">🏎️ F1 SYSTEM</div>
+      <ul class="nav-links">
+        <li><a href="dashboard.html">📊 Dashboard</a></li>
+        <li><a href="cadastro-usuarios.html">👤 Usuários</a></li>
+        <li><a href="cadastro-corredores.html">🏁 Corredores</a></li>
+        <li><a href="registro-voltas.html">⏱️ Voltas</a></li>
+        <li><a href="ranking.html">🏆 Ranking</a></li>
+        <li><a href="podio.html">🥇 Pódio</a></li>
+        <li><a href="#" onclick="logout()">🚪 Sair</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h1 style="text-align: center; margin: 2rem 0; font-size: 3rem; background: linear-gradient(45deg, #ff1744, #ff9100); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+      🏆 Ranking Geral
+    </h1>
+    
+    <div class="card" style="margin-bottom: 2rem;">
+      <div id="rankingTable">
+        Carregando ranking...
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="../js/ranking.js"></script>
+</body>
+</html>
+
+<script>function logout(){localStorage.removeItem('f1_user');window.location.href='login.html'}</script>
