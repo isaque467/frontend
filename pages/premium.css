@@ -1,0 +1,838 @@
+/* ============================================================
+   F1 SYSTEM - PREMIUM VISUALS (N√≠vel S√™nior Avan√ßado)
+   Efeitos de alta fidelidade
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   1. CHROMATIC ABERRATION + NEON FLICKER NOS T√çTULOS
+   ---------------------------------------------------------- */
+
+.page-title,
+.logo {
+  text-shadow:
+    -2px 0 0 rgba(255, 23, 68, 0.4),
+    2px 0 0 rgba(0, 255, 255, 0.3);
+}
+
+.page-title {
+  animation: neonFlicker 4s infinite;
+}
+
+.logo {
+  animation: neonFlicker 5s infinite 1s;
+}
+
+@keyframes neonFlicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 20px rgba(255,23,68,0.3));
+  }
+  20%, 24%, 55% {
+    opacity: 0.85;
+    filter: drop-shadow(0 0 5px rgba(255,23,68,0.1));
+  }
+  22% {
+    opacity: 0.4;
+    filter: drop-shadow(0 0 2px rgba(255,23,68,0.05));
+  }
+}
+
+/* ----------------------------------------------------------
+   2. TEXTO 3D COM SOMBRAS EM CAMADAS
+   ---------------------------------------------------------- */
+
+.stat-number {
+  text-shadow:
+    0 1px 0 rgba(0,0,0,0.4),
+    0 2px 0 rgba(0,0,0,0.35),
+    0 3px 0 rgba(0,0,0,0.3),
+    0 4px 0 rgba(0,0,0,0.25),
+    0 5px 10px rgba(0,0,0,0.5),
+    0 0 30px rgba(255,23,68,0.3),
+    0 0 60px rgba(255,145,0,0.15);
+}
+
+.podio-posicao {
+  text-shadow:
+    0 0 20px currentColor,
+    0 0 40px currentColor,
+    0 0 80px currentColor;
+}
+
+/* ----------------------------------------------------------
+   3. PART√çCULAS / FA√çSCAS NO FUNDO
+   ---------------------------------------------------------- */
+
+.container::after {
+  content: '';
+  position: fixed;
+  top: -10px;
+  left: 20%;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: rgba(255, 23, 68, 0.8);
+  box-shadow:
+    0 0 4px 1px rgba(255, 23, 68, 0.6),
+    0 0 8px 2px rgba(255, 145, 0, 0.3);
+  animation: sparkFall1 6s linear infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.nav::after {
+  content: '';
+  position: fixed;
+  top: -10px;
+  right: 30%;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: rgba(255, 215, 0, 0.9);
+  box-shadow:
+    0 0 4px 1px rgba(255, 215, 0, 0.6),
+    0 0 10px 3px rgba(255, 145, 0, 0.3);
+  animation: sparkFall2 8s linear infinite 2s;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.header::after {
+  content: '';
+  position: fixed;
+  top: -10px;
+  left: 60%;
+  width: 1.5px;
+  height: 1.5px;
+  border-radius: 50%;
+  background: rgba(255, 145, 0, 0.8);
+  box-shadow:
+    0 0 3px 1px rgba(255, 145, 0, 0.5);
+  animation: sparkFall3 7s linear infinite 4s;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes sparkFall1 {
+  0% { transform: translateY(0) translateX(0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(100vh) translateX(30px); opacity: 0; }
+}
+
+@keyframes sparkFall2 {
+  0% { transform: translateY(0) translateX(0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(100vh) translateX(-20px); opacity: 0; }
+}
+
+@keyframes sparkFall3 {
+  0% { transform: translateY(0) translateX(0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(100vh) translateX(15px); opacity: 0; }
+}
+
+/* ----------------------------------------------------------
+   4. EFEITO CRT + VIGNETTE MAIS FORTE
+   ---------------------------------------------------------- */
+
+body::before {
+  background-image:
+    linear-gradient(rgba(255, 23, 68, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 23, 68, 0.03) 1px, transparent 1px),
+    linear-gradient(rgba(255, 145, 0, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 145, 0, 0.015) 1px, transparent 1px),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.15) 2px,
+      rgba(0, 0, 0, 0.15) 4px
+    );
+  background-size:
+    100px 100px, 100px 100px, 20px 20px, 20px 20px,
+    100% 4px;
+}
+
+.container::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 0%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.5) 90%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+}
+
+/* ----------------------------------------------------------
+   5. RESPIRA√á√ÉO AMBIENTE NOS CARDS
+   ---------------------------------------------------------- */
+
+.glass-card,
+.card,
+.stat-card {
+  animation: ambientBreathe 6s ease-in-out infinite;
+}
+
+.glass-card:nth-child(2n),
+.card:nth-child(2n),
+.stat-card:nth-child(2n) {
+  animation-delay: -3s;
+}
+
+@keyframes ambientBreathe {
+  0%, 100% {
+    box-shadow:
+      0 10px 40px rgba(0, 0, 0, 0.45),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.35);
+  }
+  50% {
+    box-shadow:
+      0 15px 50px rgba(0, 0, 0, 0.5),
+      0 0 25px rgba(255, 23, 68, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.12),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.35);
+  }
+}
+
+/* ----------------------------------------------------------
+   6. MOTION BLUR + TRANSITIONS SUAVES
+   ---------------------------------------------------------- */
+
+.glass-card,
+.card,
+.stat-card,
+.podio-card,
+.btn,
+.nav-links a {
+  will-change: transform;
+}
+
+.glass-card,
+.card,
+.stat-card {
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
+}
+
+/* ----------------------------------------------------------
+   7. EFEITO HOLOGR√ÅFICO NOS CARDS AO HOVER
+   ---------------------------------------------------------- */
+
+.glass-card:hover,
+.card:hover {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.09) 0%,
+    rgba(0, 255, 255, 0.02) 30%,
+    rgba(255, 255, 255, 0.03) 60%,
+    rgba(255, 0, 128, 0.02) 100%
+  ) !important;
+}
+
+/* ----------------------------------------------------------
+   8. TEXTURA DE ASFALTO NO FUNDO
+   ---------------------------------------------------------- */
+
+html::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -4;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image:
+    radial-gradient(circle at 20% 50%, rgba(255,255,255,0.8) 0%, transparent 0.5%),
+    radial-gradient(circle at 80% 20%, rgba(255,255,255,0.6) 0%, transparent 0.4%),
+    radial-gradient(circle at 40% 80%, rgba(255,255,255,0.7) 0%, transparent 0.6%),
+    radial-gradient(circle at 60% 40%, rgba(255,255,255,0.5) 0%, transparent 0.3%),
+    radial-gradient(circle at 10% 10%, rgba(255,255,255,0.9) 0%, transparent 0.5%),
+    radial-gradient(circle at 90% 90%, rgba(255,255,255,0.6) 0%, transparent 0.4%),
+    radial-gradient(circle at 50% 60%, rgba(255,255,255,0.7) 0%, transparent 0.5%),
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8) 0%, transparent 0.3%),
+    radial-gradient(circle at 70% 70%, rgba(255,255,255,0.5) 0%, transparent 0.6%),
+    radial-gradient(circle at 15% 85%, rgba(255,255,255,0.7) 0%, transparent 0.4%);
+  background-size:
+    120px 120px, 150px 150px, 100px 100px, 180px 180px,
+    90px 90px, 200px 200px, 130px 130px, 110px 110px,
+    160px 160px, 140px 140px;
+}
+
+/* ----------------------------------------------------------
+   9. MARCA√á√ïES DE PIT LANE NO FUNDO
+   ---------------------------------------------------------- */
+
+.nav::before {
+  content: '';
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 215, 0, 0.3) 10%,
+    rgba(255, 215, 0, 0.3) 12%,
+    transparent 12%,
+    transparent 20%,
+    rgba(255, 215, 0, 0.2) 20%,
+    rgba(255, 215, 0, 0.2) 22%,
+    transparent 22%,
+    transparent 80%,
+    rgba(255, 215, 0, 0.2) 80%,
+    rgba(255, 215, 0, 0.2) 82%,
+    transparent 82%,
+    transparent 90%,
+    rgba(255, 215, 0, 0.3) 90%,
+    rgba(255, 215, 0, 0.3) 92%,
+    transparent 92%
+  );
+  pointer-events: none;
+  z-index: -1;
+  animation: pitLinePulse 3s ease-in-out infinite;
+}
+
+@keyframes pitLinePulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+/* ----------------------------------------------------------
+   10. GLOW DIN√ÇMICO NOS INPUTS
+   ---------------------------------------------------------- */
+
+.input:focus {
+  box-shadow:
+    0 0 0 3px rgba(255, 23, 68, 0.1),
+    0 0 30px rgba(255, 23, 68, 0.2),
+    0 0 60px rgba(255, 145, 0, 0.1),
+    inset 0 2px 5px rgba(0, 0, 0, 0.45) !important;
+}
+
+/* ----------------------------------------------------------
+   11. REFLEXO DE PISTA MOLHADA NO P√ìDIO
+   ---------------------------------------------------------- */
+
+.podio-pos::after {
+  height: 6px !important;
+  filter: blur(4px) !important;
+  opacity: 0.6 !important;
+  animation: reflectionPulse 3s ease-in-out infinite;
+}
+
+@keyframes reflectionPulse {
+  0%, 100% { opacity: 0.4; transform: translateX(-50%) scaleX(0.9); }
+  50% { opacity: 0.7; transform: translateX(-50%) scaleX(1.05); }
+}
+
+/* ----------------------------------------------------------
+   12. ANIMA√á√ÉO DE SHAKE NOS N√öMEROS
+   ---------------------------------------------------------- */
+
+.stat-number:hover {
+  animation: numberShake 0.3s ease;
+}
+
+@keyframes numberShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-2px); }
+  75% { transform: translateX(2px); }
+}
+
+/* ----------------------------------------------------------
+   13. TABELA COM HOVER ILUMINADO
+   ---------------------------------------------------------- */
+
+.table tbody tr {
+  transition: all 0.3s ease;
+}
+
+.table tbody tr:hover {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 23, 68, 0.05) 0%,
+    rgba(255, 145, 0, 0.08) 50%,
+    rgba(255, 23, 68, 0.05) 100%
+  ) !important;
+  transform: scaleX(1.01);
+  box-shadow: 0 0 20px rgba(255, 23, 68, 0.1);
+}
+
+/* ----------------------------------------------------------
+   14. RESPONSIVIDADE PREMIUM
+   ---------------------------------------------------------- */
+
+@media (max-width: 575.98px) {
+  .page-title,
+  .logo {
+    text-shadow: none;
+    animation: none;
+  }
+
+  .nav::before,
+  .nav::after,
+  .header::after {
+    display: none;
+  }
+
+  .stat-number:hover {
+    animation: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-title,
+  .logo,
+  .stat-number,
+  .podio-pos::after,
+  .nav::before,
+  .glass-card,
+  .card,
+  .stat-card {
+    animation: none !important;
+  }
+}
+
+/* ----------------------------------------------------------
+   14. SELECT DE CORREDORES - TEXTO PRETO
+   ---------------------------------------------------------- */
+
+/* No registro de voltas, o select de corredores precisa ter
+   texto preto para melhor legibilidade dos nomes */
+select#corredor_id {
+  color: #000 !important;
+}
+
+select#corredor_id option {
+  color: #000 !important;
+  background: #fff;
+}
+
+/* Placeholder do select mantÈm estilo original */
+select#corredor_id option[value=""] {
+  color: rgba(0, 0, 0, 0.5) !important;
+}
+
+/* ============================================================
+   P”DIO ULTRA PREMIUM - Efeitos de alta fidelidade
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   1. BASE DO P”DIO - ALTURAS REAIS (1∫ mais alto)
+   ---------------------------------------------------------- */
+
+/* Container do pÛdio com perspectiva 3D */
+#podioFull.podio,
+#podioDashboard.podio {
+  display: flex !important;
+  align-items: flex-end !important;
+  justify-content: center !important;
+  gap: 1.5rem !important;
+  min-height: 500px !important;
+  padding-bottom: 60px !important;
+  position: relative !important;
+}
+
+/* Cada posiÁ„o tem pedestal de altura diferente */
+.podio-pos.podio-1 {
+  order: 2 !important;
+  transform: translateY(-60px) !important;
+  z-index: 3 !important;
+}
+
+.podio-pos.podio-2 {
+  order: 1 !important;
+  transform: translateY(0) !important;
+  z-index: 2 !important;
+}
+
+.podio-pos.podio-3 {
+  order: 3 !important;
+  transform: translateY(20px) !important;
+  z-index: 2 !important;
+}
+
+/* Pedestal/Base embaixo de cada card */
+.podio-pos::after {
+  content: "" !important;
+  position: absolute !important;
+  bottom: -50px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 90% !important;
+  height: 50px !important;
+  border-radius: 8px !important;
+  z-index: -1 !important;
+}
+
+.podio-1::after {
+  background: linear-gradient(180deg, #b8860b 0%, #ffd700 40%, #ffec8b 100%) !important;
+  box-shadow: 0 10px 40px rgba(255, 215, 0, 0.4), 0 0 60px rgba(255, 215, 0, 0.2) !important;
+  height: 90px !important;
+  bottom: -90px !important;
+}
+
+.podio-2::after {
+  background: linear-gradient(180deg, #808080 0%, #c0c0c0 40%, #e8e8e8 100%) !important;
+  box-shadow: 0 8px 30px rgba(192, 192, 192, 0.3), 0 0 40px rgba(192, 192, 192, 0.15) !important;
+  height: 60px !important;
+  bottom: -60px !important;
+}
+
+.podio-3::after {
+  background: linear-gradient(180deg, #8b4513 0%, #cd7f32 40%, #daa520 100%) !important;
+  box-shadow: 0 8px 30px rgba(205, 127, 50, 0.3), 0 0 40px rgba(205, 127, 50, 0.15) !important;
+  height: 40px !important;
+  bottom: -40px !important;
+}
+
+/* ----------------------------------------------------------
+   2. HOLOFOTES DE COBERTURA (Spotlights)
+   ---------------------------------------------------------- */
+
+/* Holofote para o 1∫ lugar */
+.podio-1::before {
+  content: "" !important;
+  position: absolute !important;
+  top: -150px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 200px !important;
+  height: 400px !important;
+  background: conic-gradient(from 180deg at 50% 0%, transparent 0deg, rgba(255, 215, 0, 0.12) 30deg, rgba(255, 215, 0, 0.2) 60deg, rgba(255, 215, 0, 0.12) 90deg, transparent 120deg) !important;
+  pointer-events: none !important;
+  z-index: -2 !important;
+  animation: spotlightSweep 4s ease-in-out infinite !important;
+}
+
+@keyframes spotlightSweep {
+  0%, 100% { transform: translateX(-50%) rotate(-5deg); opacity: 0.6; }
+  50% { transform: translateX(-50%) rotate(5deg); opacity: 1; }
+}
+
+/* ----------------------------------------------------------
+   3. CARDS DO P”DIO REDESIGNADOS
+   ---------------------------------------------------------- */
+
+.podio-card {
+  position: relative !important;
+  padding: 2.5rem 2rem !important;
+  border-radius: 20px !important;
+  text-align: center !important;
+  backdrop-filter: blur(25px) saturate(1.3) !important;
+  -webkit-backdrop-filter: blur(25px) saturate(1.3) !important;
+  border: 2px solid rgba(255, 255, 255, 0.15) !important;
+  overflow: visible !important;
+}
+
+/* Glow por posiÁ„o */
+.podio-1 .podio-card {
+  background: linear-gradient(165deg, rgba(255,215,0,0.2) 0%, rgba(184,134,11,0.15) 50%, rgba(255,215,0,0.1) 100%) !important;
+  border: 2px solid rgba(255, 215, 0, 0.4) !important;
+  box-shadow:
+    0 0 60px rgba(255, 215, 0, 0.25),
+    0 15px 50px rgba(0,0,0,0.5),
+    inset 0 2px 0 rgba(255,255,255,0.15),
+    inset 0 -2px 0 rgba(0,0,0,0.3) !important;
+  transform: scale(1.15) !important;
+  animation: winnerFloat 3s ease-in-out infinite !important;
+}
+
+.podio-2 .podio-card {
+  background: linear-gradient(165deg, rgba(192,192,192,0.15) 0%, rgba(128,128,128,0.1) 50%, rgba(192,192,192,0.08) 100%) !important;
+  border: 2px solid rgba(192, 192, 192, 0.3) !important;
+  box-shadow:
+    0 0 40px rgba(192, 192, 192, 0.15),
+    0 15px 50px rgba(0,0,0,0.5),
+    inset 0 2px 0 rgba(255,255,255,0.1),
+    inset 0 -2px 0 rgba(0,0,0,0.3) !important;
+}
+
+.podio-3 .podio-card {
+  background: linear-gradient(165deg, rgba(205,127,50,0.15) 0%, rgba(139,69,19,0.1) 50%, rgba(205,127,50,0.08) 100%) !important;
+  border: 2px solid rgba(205, 127, 50, 0.3) !important;
+  box-shadow:
+    0 0 40px rgba(205, 127, 50, 0.15),
+    0 15px 50px rgba(0,0,0,0.5),
+    inset 0 2px 0 rgba(255,255,255,0.1),
+    inset 0 -2px 0 rgba(0,0,0,0.3) !important;
+}
+
+/* FlutuaÁ„o do vencedor */
+@keyframes winnerFloat {
+  0%, 100% { transform: scale(1.15) translateY(0); }
+  50% { transform: scale(1.15) translateY(-12px); }
+}
+
+/* ----------------------------------------------------------
+   4. TROF…U NO 1∫ LUGAR (CSS-only)
+   ---------------------------------------------------------- */
+
+.podio-1 .podio-posicao {
+  position: relative !important;
+  display: inline-block !important;
+}
+
+.podio-1 .podio-posicao::before {
+  content: "??" !important;
+  position: absolute !important;
+  top: -50px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  font-size: 3.5rem !important;
+  filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.6)) !important;
+  animation: trophyBounce 2s ease-in-out infinite !important;
+  z-index: 10 !important;
+}
+
+@keyframes trophyBounce {
+  0%, 100% { transform: translateX(-50%) translateY(0) rotate(-5deg); }
+  50% { transform: translateX(-50%) translateY(-10px) rotate(5deg); }
+}
+
+/* ----------------------------------------------------------
+   5. N⁄MEROS GRANDES E ESTILIZADOS
+   ---------------------------------------------------------- */
+
+.podio-posicao {
+  font-family: "Orbitron", sans-serif !important;
+  font-size: 5rem !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  margin-bottom: 1rem !important;
+}
+
+.podio-1 .podio-posicao {
+  font-size: 6.5rem !important;
+  color: #ffd700 !important;
+  text-shadow:
+    0 0 30px rgba(255, 215, 0, 0.5),
+    0 0 60px rgba(255, 215, 0, 0.3),
+    0 0 100px rgba(255, 215, 0, 0.1),
+    0 4px 8px rgba(0,0,0,0.5) !important;
+}
+
+.podio-2 .podio-posicao {
+  font-size: 5.5rem !important;
+  color: #c0c0c0 !important;
+  text-shadow:
+    0 0 25px rgba(192, 192, 192, 0.4),
+    0 0 50px rgba(192, 192, 192, 0.2),
+    0 4px 8px rgba(0,0,0,0.5) !important;
+}
+
+.podio-3 .podio-posicao {
+  font-size: 5rem !important;
+  color: #cd7f32 !important;
+  text-shadow:
+    0 0 25px rgba(205, 127, 50, 0.4),
+    0 0 50px rgba(205, 127, 50, 0.2),
+    0 4px 8px rgba(0,0,0,0.5) !important;
+}
+
+/* ----------------------------------------------------------
+   6. FAIXA "WINNER" NO PRIMEIRO LUGAR
+   ---------------------------------------------------------- */
+
+.podio-1 .podio-card::before {
+  content: "WINNER" !important;
+  position: absolute !important;
+  top: -14px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  background: linear-gradient(90deg, #ff1744, #ff9100, #ffd700, #ff9100, #ff1744) !important;
+  background-size: 200% 100% !important;
+  color: #fff !important;
+  font-family: "Orbitron", sans-serif !important;
+  font-size: 0.65rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 3px !important;
+  padding: 4px 20px !important;
+  border-radius: 20px !important;
+  box-shadow: 0 4px 15px rgba(255, 23, 68, 0.4), 0 0 20px rgba(255, 145, 0, 0.3) !important;
+  animation: winnerRibbon 2s linear infinite, ribbonGlow 2s ease-in-out infinite !important;
+  z-index: 10 !important;
+  white-space: nowrap !important;
+}
+
+@keyframes winnerRibbon {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+@keyframes ribbonGlow {
+  0%, 100% { box-shadow: 0 4px 15px rgba(255, 23, 68, 0.4), 0 0 20px rgba(255, 145, 0, 0.3); }
+  50% { box-shadow: 0 4px 25px rgba(255, 23, 68, 0.6), 0 0 40px rgba(255, 145, 0, 0.5); }
+}
+
+/* ----------------------------------------------------------
+   7. NOME, EQUIPE E TEMPO ESTILIZADOS
+   ---------------------------------------------------------- */
+
+/* Nome do corredor */
+.podio-card div[style*="font-size: 1.8rem"],
+.podio-card div:nth-child(3) {
+  font-family: "Orbitron", sans-serif !important;
+  color: #fff !important;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5) !important;
+  letter-spacing: 1px !important;
+}
+
+/* Equipe */
+.podio-card div[style*="opacity: 0.9"],
+.podio-card div:nth-child(4) {
+  font-family: "Rajdhani", sans-serif !important;
+  font-weight: 600 !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+}
+
+/* Tempo principal - estilo arcade */
+.podio-card div[style*="font-size: 1.6rem"],
+.podio-card div:nth-child(5) {
+  font-family: "Orbitron", monospace !important;
+  font-size: 1.8rem !important;
+  color: #4ade80 !important;
+  background: rgba(0, 0, 0, 0.4) !important;
+  padding: 8px 16px !important;
+  border-radius: 10px !important;
+  display: inline-block !important;
+  border: 1px solid rgba(74, 222, 128, 0.2) !important;
+  box-shadow: 0 0 15px rgba(74, 222, 128, 0.1), inset 0 1px 0 rgba(255,255,255,0.05) !important;
+}
+
+/* Melhor volta */
+.podio-card div[style*="font-size: 1.1rem"],
+.podio-card div:nth-child(6) {
+  font-family: "Orbitron", monospace !important;
+  font-size: 0.9rem !important;
+  color: #ff9100 !important;
+  opacity: 1 !important;
+}
+
+/* ----------------------------------------------------------
+   8. CONFETES VIA CSS SPARKS
+   ---------------------------------------------------------- */
+
+.podio::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  pointer-events: none !important;
+  z-index: -1 !important;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(255, 215, 0, 0.4) 0%, transparent 3px),
+    radial-gradient(circle at 80% 30%, rgba(255, 23, 68, 0.3) 0%, transparent 2px),
+    radial-gradient(circle at 50% 10%, rgba(255, 145, 0, 0.4) 0%, transparent 2.5px),
+    radial-gradient(circle at 40% 25%, rgba(255, 215, 0, 0.3) 0%, transparent 2px),
+    radial-gradient(circle at 70% 15%, rgba(255, 23, 68, 0.3) 0%, transparent 3px),
+    radial-gradient(circle at 30% 5%, rgba(255, 145, 0, 0.3) 0%, transparent 2px),
+    radial-gradient(circle at 90% 25%, rgba(255, 215, 0, 0.3) 0%, transparent 2.5px),
+    radial-gradient(circle at 10% 30%, rgba(255, 23, 68, 0.3) 0%, transparent 2px);
+  background-size: 100% 100%;
+  animation: confettiTwinkle 2s ease-in-out infinite !important;
+}
+
+@keyframes confettiTwinkle {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+/* ----------------------------------------------------------
+   9. REFLEXO ESPECULAR (VIDRO MOLHADO)
+   ---------------------------------------------------------- */
+
+.podio-card::after {
+  content: "" !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: -100% !important;
+  width: 50% !important;
+  height: 100% !important;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.08),
+    transparent
+  ) !important;
+  transform: skewX(-20deg) !important;
+  animation: glassShine 4s ease-in-out infinite !important;
+  pointer-events: none !important;
+}
+
+@keyframes glassShine {
+  0% { left: -100%; }
+  40%, 100% { left: 200%; }
+}
+
+/* ----------------------------------------------------------
+   10. ANIMA«√O DE ENTRADA DO P”DIO PREMIUM
+   ---------------------------------------------------------- */
+
+.podio-pos {
+  animation: podiumEnter 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both !important;
+}
+
+.podio-pos.podio-2 { animation-delay: 0.15s !important; }
+.podio-pos.podio-3 { animation-delay: 0.3s !important; }
+
+@keyframes podiumEnter {
+  from {
+    opacity: 0;
+    transform: translateY(80px) scale(0.8);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+/* ----------------------------------------------------------
+   11. RESPONSIVIDADE DO P”DIO PREMIUM
+   ---------------------------------------------------------- */
+
+@media (max-width: 767.98px) {
+  .podio-pos.podio-1,
+  .podio-pos.podio-2,
+  .podio-pos.podio-3 {
+    transform: none !important;
+    order: initial !important;
+  }
+
+  .podio-pos.podio-1 {
+    transform: scale(1.05) !important;
+  }
+
+  .podio-pos::after {
+    display: none !important;
+  }
+
+  .podio-1 .podio-posicao::before {
+    font-size: 2.5rem !important;
+    top: -35px !important;
+  }
+
+  .podio-1 .podio-card {
+    animation: none !important;
+    transform: scale(1.05) !important;
+  }
+
+  .podio-posicao {
+    font-size: 3.5rem !important;
+  }
+}

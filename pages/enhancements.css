@@ -1,0 +1,448 @@
+/* ============================================================
+   F1 SYSTEM - ENHANCEMENTS SENIOR
+   Melhorias visuais puramente CSS (sem alterar HTML/JS)
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   1. SCROLL SUAVE E SELEÇÃO DE TEXTO TEMÁTICA
+   ---------------------------------------------------------- */
+
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background: rgba(255, 23, 68, 0.35);
+  color: #fff;
+  text-shadow: 0 0 10px rgba(255, 23, 68, 0.5);
+}
+
+::-moz-selection {
+  background: rgba(255, 23, 68, 0.35);
+  color: #fff;
+}
+
+/* ----------------------------------------------------------
+   2. CURSOR PERSONALIZADO NO TEMA F1
+   ---------------------------------------------------------- */
+
+body {
+  cursor: crosshair;
+}
+
+a, button, .btn, .input, select, .hamburger, [onclick] {
+  cursor: pointer;
+}
+
+/* ----------------------------------------------------------
+   3. FOCUS-VISIBLE ESTILIZADO (Acessibilidade + Estilo)
+   ---------------------------------------------------------- */
+
+*:focus-visible {
+  outline: 2px solid rgba(255, 145, 0, 0.6);
+  outline-offset: 3px;
+  border-radius: 4px;
+  box-shadow: 0 0 15px rgba(255, 145, 0, 0.25);
+}
+
+.input:focus-visible,
+.btn:focus-visible {
+  outline: none;
+}
+
+/* ----------------------------------------------------------
+   4. ANIMAÇÃO DE ENTRADA (Fade-in Slide-up) NOS CARDS
+   ---------------------------------------------------------- */
+
+.glass-card,
+.card,
+.stat-card,
+.podio-card {
+  animation: cardEnter 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Stagger effect - cada card aparece com delay incremental */
+.container .glass-card:nth-child(1),
+.container .card:nth-child(1) { animation-delay: 0.05s; }
+.container .glass-card:nth-child(2),
+.container .card:nth-child(2) { animation-delay: 0.12s; }
+.container .glass-card:nth-child(3),
+.container .card:nth-child(3) { animation-delay: 0.19s; }
+.container .glass-card:nth-child(4),
+.container .card:nth-child(4) { animation-delay: 0.26s; }
+.container .glass-card:nth-child(5),
+.container .card:nth-child(5) { animation-delay: 0.33s; }
+
+.stats-grid .stat-card:nth-child(1) { animation-delay: 0.08s; }
+.stats-grid .stat-card:nth-child(2) { animation-delay: 0.16s; }
+.stats-grid .stat-card:nth-child(3) { animation-delay: 0.24s; }
+.stats-grid .stat-card:nth-child(4) { animation-delay: 0.32s; }
+
+.podio .podio-pos:nth-child(1) .podio-card { animation-delay: 0.15s; }
+.podio .podio-pos:nth-child(2) .podio-card { animation-delay: 0.25s; }
+.podio .podio-pos:nth-child(3) .podio-card { animation-delay: 0.35s; }
+
+@keyframes cardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ----------------------------------------------------------
+   5. EFEITO 3D TILT NOS CARDS AO HOVER
+   ---------------------------------------------------------- */
+
+.glass-card,
+.card,
+.stat-card {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.glass-card:hover,
+.card:hover,
+.stat-card:hover {
+  transform: translateY(-5px) rotateX(2deg) rotateY(-2deg);
+}
+
+/* ----------------------------------------------------------
+   6. BORDA ANIMADA "CORRENDO" NOS CARDS
+   ---------------------------------------------------------- */
+
+.glass-card::before,
+.card::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 17px;
+  padding: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    transparent 40%,
+    rgba(255, 23, 68, 0.4) 50%,
+    transparent 60%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: borderRun 4s linear infinite;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.glass-card:hover::before,
+.card:hover::before {
+  opacity: 1;
+}
+
+@keyframes borderRun {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ----------------------------------------------------------
+   7. SPEED LINES NO FUNDO (Sensação de velocidade F1)
+   ---------------------------------------------------------- */
+
+body::before {
+  /* Adiciona speed lines por cima do circuito original */
+  background-image:
+    /* Circuito original */
+    linear-gradient(rgba(255, 23, 68, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 23, 68, 0.03) 1px, transparent 1px),
+    linear-gradient(rgba(255, 145, 0, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 145, 0, 0.015) 1px, transparent 1px),
+    /* Speed lines diagonais */
+    repeating-linear-gradient(
+      60deg,
+      transparent,
+      transparent 100px,
+      rgba(255, 23, 68, 0.008) 100px,
+      rgba(255, 23, 68, 0.008) 101px
+    ),
+    repeating-linear-gradient(
+      -60deg,
+      transparent,
+      transparent 150px,
+      rgba(255, 145, 0, 0.006) 150px,
+      rgba(255, 145, 0, 0.006) 151px
+    );
+  background-size:
+    100px 100px, 100px 100px, 20px 20px, 20px 20px,
+    200px 200px, 300px 300px;
+}
+
+/* ----------------------------------------------------------
+   8. EFEITO GLITCH NOS TÍTULOS PRINCIPAIS
+   ---------------------------------------------------------- */
+
+.page-title {
+  position: relative;
+}
+
+.page-title::before {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #ff1744, #ff9100);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  clip-path: inset(0 0 0 0);
+  animation: glitchSlice 5s infinite linear;
+  opacity: 0.8;
+}
+
+/* Como não podemos adicionar data-text no HTML,
+   aplicamos o glitch de forma sutil no ::after */
+.page-title::after {
+  animation: glitchSlice 4s infinite linear reverse;
+}
+
+@keyframes glitchSlice {
+  0%, 90%, 100% {
+    clip-path: inset(0 0 0 0);
+    transform: translateX(0);
+  }
+  91% {
+    clip-path: inset(20% 0 60% 0);
+    transform: translateX(-3px);
+  }
+  92% {
+    clip-path: inset(50% 0 20% 0);
+    transform: translateX(3px);
+  }
+  93% {
+    clip-path: inset(10% 0 80% 0);
+    transform: translateX(-2px);
+  }
+  94% {
+    clip-path: inset(0 0 0 0);
+    transform: translateX(0);
+  }
+}
+
+/* ----------------------------------------------------------
+   9. REFLEXO NO CHÃO PARA CARDS DO PÓDIO
+   ---------------------------------------------------------- */
+
+.podio-pos {
+  position: relative;
+}
+
+.podio-pos::before {
+  content: '';
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%) scaleY(-1);
+  width: 80%;
+  height: 40px;
+  background: inherit;
+  border-radius: inherit;
+  opacity: 0.15;
+  filter: blur(8px);
+  pointer-events: none;
+}
+
+/* ----------------------------------------------------------
+   10. GRADIENTE ANIMADO NOS BOTÕES
+   ---------------------------------------------------------- */
+
+.btn {
+  background-size: 200% 200% !important;
+  animation: gradientShift 3s ease infinite !important;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ----------------------------------------------------------
+   11. TOOLTIP CUSTOMIZADO NATIVO
+   ---------------------------------------------------------- */
+
+[title] {
+  position: relative;
+}
+
+[title]:hover::after {
+  content: attr(title);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, rgba(255, 23, 68, 0.9), rgba(255, 145, 0, 0.9));
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  z-index: 10000;
+  box-shadow: 0 4px 15px rgba(255, 23, 68, 0.3);
+  pointer-events: none;
+  animation: tooltipPop 0.2s ease both;
+}
+
+[title]:hover::before {
+  content: '';
+  position: absolute;
+  bottom: calc(100% + 3px);
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: rgba(255, 145, 0, 0.9);
+  z-index: 10001;
+  pointer-events: none;
+}
+
+@keyframes tooltipPop {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(5px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+}
+
+/* ----------------------------------------------------------
+   12. EFEITO DE PULSO NOS BADGES F1
+   ---------------------------------------------------------- */
+
+.f1-badge {
+  animation: badgePulse 2s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(255, 23, 68, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 23, 68, 0.5), 0 0 30px rgba(255, 145, 0, 0.3);
+  }
+}
+
+/* ----------------------------------------------------------
+   13. LOADING COM EFEITO DE VELOCÍMETRO
+   ---------------------------------------------------------- */
+
+.loading {
+  border-width: 3px;
+  border-top-color: #ff1744;
+  border-right-color: #ff9100;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+  box-shadow: 0 0 10px rgba(255, 23, 68, 0.2);
+}
+
+/* ----------------------------------------------------------
+   14. LINKS COM UNDERLINE ANIMADO
+   ---------------------------------------------------------- */
+
+.nav-links a {
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #ff1744, #ff9100);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+  box-shadow: 0 0 10px rgba(255, 23, 68, 0.4);
+}
+
+.nav-links a:hover::after {
+  width: 80%;
+}
+
+/* ----------------------------------------------------------
+   15. SCROLLBAR APERFEIÇOADA
+   ---------------------------------------------------------- */
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.4), rgba(10, 10, 20, 0.5));
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ff1744, #ff9100, #ffd700);
+  border-radius: 6px;
+  border: 2px solid rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #ff4567, #ffb347, #ffec8b);
+  box-shadow: 0 0 15px rgba(255, 23, 68, 0.4);
+}
+
+/* ----------------------------------------------------------
+   16. RESPONSIVIDADE DAS ENHANCEMENTS
+   ---------------------------------------------------------- */
+
+@media (max-width: 575.98px) {
+  .glass-card:hover,
+  .card:hover,
+  .stat-card:hover {
+    transform: translateY(-3px);
+  }
+
+  .glass-card::before,
+  .card::before {
+    animation: none;
+  }
+
+  .page-title::before {
+    display: none;
+  }
+
+  [title]:hover::after,
+  [title]:hover::before {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
