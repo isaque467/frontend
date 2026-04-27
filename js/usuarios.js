@@ -16,7 +16,7 @@ userForm.addEventListener('submit', async (e) => {
   submitBtn.disabled = true;
   
   try {
-    await apiRequest('/users', {
+    await apiRequest('/users/create', {
       method: 'POST',
       body: JSON.stringify({ nome, email, senha })
     });

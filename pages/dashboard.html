@@ -5,51 +5,71 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard - Sistema Corrida F1</title>
   <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+  <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
+
   <header class="header">
     <nav class="nav">
       <div class="logo">🏎️ F1 SYSTEM</div>
-      <button class="hamburger" aria-label="Toggle Menu" onclick="toggleMenu()">☰</button>
-      <ul class="nav-links">
-        <li><a href="dashboard.html">📊 Dashboard</a></li>
-        <li><a href="cadastro-usuarios.html">👤 Usuários</a></li>
-        <li><a href="cadastro-corredores.html">🏁 Corredores</a></li>
-        <li><a href="registro-voltas.html">⏱️ Voltas</a></li>
-        <li><a href="ranking.html">🏆 Ranking</a></li>
-        <li><a href="podio.html">🥇 Pódio</a></li>
-        <li><a href="#" onclick="logout()">🚪 Sair</a></li>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Menu" aria-expanded="false" onclick="toggleMenu()">☰</button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="dashboard.html" onclick="closeMenu()">📊 Dashboard</a></li>
+        <li><a href="cadastro-usuarios.html" onclick="closeMenu()">👤 Usuários</a></li>
+        <li><a href="cadastro-corredores.html" onclick="closeMenu()">🏁 Corredores</a></li>
+        <li><a href="registro-voltas.html" onclick="closeMenu()">⏱️ Voltas</a></li>
+        <li><a href="ranking.html" onclick="closeMenu()">🏆 Ranking</a></li>
+        <li><a href="podio.html" onclick="closeMenu()">🥇 Pódio</a></li>
+        <li><a href="#" onclick="logout(); closeMenu();">🚪 Sair</a></li>
       </ul>
     </nav>
   </header>
 
   <div class="container">
-    <h1 style="text-align: center; margin: 2rem 0 3rem; font-size: 3rem; background: linear-gradient(45deg, #ff1744, #ff9100); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-      Painel de Controle F1 🏎️
-    </h1>
+    <h1 class="page-title">Painel de Controle F1 🏎️</h1>
 
     <div class="stats-grid" id="stats">
-      <!-- Stats serão carregados via JS -->
+      <!-- Stats via JS -->
     </div>
 
     <div class="podio" id="podioDashboard">
-      <!-- Pódio será carregado via JS -->
+      <!-- Pódio via JS -->
     </div>
-  </div>
 
   <script src="../js/api.js"></script>
   <script src="../js/dashboard.js"></script>
+  <script>
+    function logout() {
+      localStorage.removeItem('f1_user');
+      window.location.href = 'login.html';
+    }
+
+    function toggleMenu() {
+      const nav = document.getElementById('navLinks');
+      const overlay = document.getElementById('menuOverlay');
+      const btn = document.getElementById('hamburgerBtn');
+      const isOpen = nav.classList.toggle('active');
+      overlay.classList.toggle('active', isOpen);
+      btn.setAttribute('aria-expanded', isOpen);
+      btn.textContent = isOpen ? '✕' : '☰';
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    }
+
+    function closeMenu() {
+      const nav = document.getElementById('navLinks');
+      const overlay = document.getElementById('menuOverlay');
+      const btn = document.getElementById('hamburgerBtn');
+      nav.classList.remove('active');
+      overlay.classList.remove('active');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.textContent = '☰';
+      document.body.style.overflow = '';
+    }
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 575.98) closeMenu();
+    });
+  </script>
 </body>
 </html>
-
-<script>
-function logout() {
-  localStorage.removeItem('f1_user');
-  window.location.href = 'login.html';
-}
-
-function toggleMenu() {
-  document.querySelector('.nav-links').classList.toggle('active');
-}
-</script>
