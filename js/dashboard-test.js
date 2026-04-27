@@ -1,3 +1,4 @@
+// Versão de teste sem verificação de login
 import { apiRequest } from './api.js';
 
 const statsDiv = document.getElementById('stats');
@@ -5,22 +6,20 @@ const podioDashboard = document.getElementById('podioDashboard');
 
 let updateInterval;
 
-// Verificar login
-if (!localStorage.getItem('f1_user')) {
-  window.location.href = 'login.html';
-}
-
 // Carregar dashboard
 async function loadDashboard() {
   try {
+    console.log('Carregando dashboard...');
     const statsData = await apiRequest('/dashboard');
+    console.log('Stats:', statsData);
     const podioData = await apiRequest('/podio');
+    console.log('Podio:', podioData);
     
     renderStats(statsData);
     renderPodioDashboard(podioData);
   } catch (error) {
     console.error('Erro carregando dashboard:', error);
-    statsDiv.innerHTML = '<div style="text-align:center;color:#ff1744;">Erro ao carregar estatísticas</div>';
+    statsDiv.innerHTML = `<div style="color: #ff1744; text-align: center;">Erro: ${error.message}</div>`;
   }
 }
 
@@ -44,13 +43,7 @@ function renderStats(data) {
         <div style="font-size: 1.2rem;">🏆 ${data.lider.nome}</div>
         <div style="opacity: 0.8;">${formatTempo(data.lider.tempo_total)}</div>
       </div>
-    ` : `
-      <div class="card stat-card">
-        <div class="stat-number" style="color: #888;">--</div>
-        <div style="font-size: 1.2rem;">🏆 Sem líder</div>
-        <div style="opacity: 0.8;">Aguardando voltas</div>
-      </div>
-    `}
+    ` : ''}
   `;
 }
 
@@ -69,7 +62,7 @@ function renderPodioDashboard(podio) {
               <div class="podio-card">
                 <div class="podio-posicao">${index + 1}º</div>
                 <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">${pos.numero} - ${pos.nome}</div>
-                <div style="opacity: 0.8; margin-bottom: 1rem;">${pos.equipe || 'Sem turma'}</div>
+                <div style="opacity: 0.8; margin-bottom: 1rem;">${pos.equipe || 'Sem equipe'}</div>
                 <div style="font-size: 1.2rem; font-weight: bold;">${formatTempo(pos.tempo_total)}</div>
                 <div style="opacity: 0.7; font-size: 0.9rem;">Melhor: ${formatTempo(pos.melhor_volta)}</div>
               </div>
@@ -85,14 +78,18 @@ function renderPodioDashboard(podio) {
 
 function formatTempo(tempo) {
   if (!tempo) return '00:00.000';
-  // O tempo pode vir como string do MySQL (TIME) ou número
+  // Se for string no formato HH:MM:SS ou MM:SS
   if (typeof tempo === 'string') {
-    // Formato HH:MM:SS ou MM:SS
     const parts = tempo.split(':');
     if (parts.length === 3) {
       const minutos = parseInt(parts[0]) * 60 + parseInt(parts[1]);
-      const segundos = parseInt(parts[2]);
-      return `${minutos}:${segundos.toString().padStart(2, '0')}.000`;
+      const segundos = parseFloat(parts[2]);
+      return `${minutos}:${Math.floor(segundos).toString().padStart(2, '0')}.${Math.round((segundos % 1) * 1000).toString().padStart(3, '0')}`;
+    }
+    if (parts.length === 2) {
+      const minutos = parseInt(parts[0]);
+      const segundos = parseFloat(parts[1]);
+      return `${minutos}:${Math.floor(segundos).toString().padStart(2, '0')}.${Math.round((segundos % 1) * 1000).toString().padStart(3, '0')}`;
     }
     return tempo;
   }

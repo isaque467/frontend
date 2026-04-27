@@ -1,0 +1,513 @@
+/* ============================================================
+   F1 SYSTEM - EFEITOS VISUAIS PREMIUM
+   Fundo de Bastões LED + Glassmorphism Aprimorado
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   1. FUNDO DE BASTÕES DE LED ANIMADOS
+   ---------------------------------------------------------- */
+
+/* Bastões LED verticais grossos - usando html::before para
+   não conflitar com body::before do style.css original */
+html::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  pointer-events: none;
+  background:
+    /* Barra vertical esquerda - vermelho neon */
+    linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(255, 23, 68, 0.22) 15%,
+      rgba(255, 145, 0, 0.3) 45%,
+      rgba(255, 23, 68, 0.22) 75%,
+      transparent 100%
+    ),
+    /* Barra vertical direita - laranja/dourado */
+    linear-gradient(
+      180deg,
+      transparent 10%,
+      rgba(255, 145, 0, 0.18) 30%,
+      rgba(255, 215, 0, 0.25) 55%,
+      rgba(255, 145, 0, 0.18) 80%,
+      transparent 100%
+    );
+  background-size: 5px 100%, 4px 100%;
+  background-position: 6% 0, 92% 0;
+  background-repeat: no-repeat;
+  filter: blur(1px);
+  animation: ledBarsPulse 4s ease-in-out infinite;
+}
+
+/* Bastões LED horizontais grossos */
+html::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  pointer-events: none;
+  background:
+    /* Barra horizontal superior - vermelho */
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 23, 68, 0.14) 20%,
+      rgba(255, 145, 0, 0.2) 50%,
+      rgba(255, 23, 68, 0.14) 80%,
+      transparent 100%
+    ),
+    /* Barra horizontal inferior - laranja */
+    linear-gradient(
+      90deg,
+      transparent 10%,
+      rgba(255, 145, 0, 0.1) 35%,
+      rgba(255, 215, 0, 0.16) 60%,
+      rgba(255, 145, 0, 0.1) 85%,
+      transparent 100%
+    );
+  background-size: 100% 3px, 100% 3px;
+  background-position: 0 28%, 0 72%;
+  background-repeat: no-repeat;
+  filter: blur(1px);
+  animation: ledBarsPulse 5s ease-in-out infinite reverse;
+}
+
+/* Padrão fino de barras LED - body::after (style.css não usa) */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  pointer-events: none;
+  background:
+    /* Barras verticais finas - vermelho */
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 80px,
+      rgba(255, 23, 68, 0.035) 80px,
+      rgba(255, 23, 68, 0.035) 81px,
+      transparent 81px,
+      transparent 160px
+    ),
+    /* Barras verticais finas - laranja (offset) */
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 200px,
+      rgba(255, 145, 0, 0.025) 200px,
+      rgba(255, 145, 0, 0.025) 201px,
+      transparent 201px,
+      transparent 280px
+    ),
+    /* Barras horizontais finas - vermelho */
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 100px,
+      rgba(255, 23, 68, 0.02) 100px,
+      rgba(255, 23, 68, 0.02) 101px,
+      transparent 101px,
+      transparent 200px
+    ),
+    /* Barras horizontais finas - laranja (offset) */
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 240px,
+      rgba(255, 145, 0, 0.015) 240px,
+      rgba(255, 145, 0, 0.015) 241px,
+      transparent 241px,
+      transparent 320px
+    );
+  animation: ledBarsPulse 6s ease-in-out infinite;
+}
+
+/* Vignette escuro nas bordas */
+body {
+  position: relative;
+}
+
+body > .container::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 0%,
+    transparent 55%,
+    rgba(0, 0, 0, 0.35) 100%
+  );
+}
+
+@keyframes ledBarsPulse {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+
+/* ----------------------------------------------------------
+   2. VIDRO (GLASSMORPHISM) APRIMORADO
+   ---------------------------------------------------------- */
+
+/* Cards com efeito de vidro espesso e reflexo */
+.glass-card,
+.card {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.07) 0%,
+    rgba(255, 255, 255, 0.025) 50%,
+    rgba(255, 255, 255, 0.05) 100%
+  ) !important;
+  backdrop-filter: blur(28px) saturate(1.25) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(1.25) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.35) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Reflexo superficial no vidro - glare effect */
+.glass-card::after,
+.card::after {
+  content: '';
+  position: absolute;
+  top: -60%;
+  left: -60%;
+  width: 220%;
+  height: 220%;
+  background: linear-gradient(
+    135deg,
+    transparent 42%,
+    rgba(255, 255, 255, 0.035) 47%,
+    rgba(255, 255, 255, 0.07) 50%,
+    rgba(255, 255, 255, 0.035) 53%,
+    transparent 58%
+  );
+  pointer-events: none;
+  animation: glassGlare 7s ease-in-out infinite;
+}
+
+@keyframes glassGlare {
+  0%, 100% {
+    transform: translateX(-25%) translateY(-25%) rotate(0deg);
+  }
+  50% {
+    transform: translateX(5%) translateY(5%) rotate(0deg);
+  }
+}
+
+/* Borda brilhante nos cards ao passar o mouse */
+.glass-card:hover,
+.card:hover {
+  border-color: rgba(255, 23, 68, 0.4) !important;
+  box-shadow:
+    0 25px 55px rgba(0, 0, 0, 0.55),
+    0 0 45px rgba(255, 23, 68, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.35) !important;
+}
+
+/* Header com vidro mais espesso */
+.header {
+  background: linear-gradient(
+    180deg,
+    rgba(12, 12, 24, 0.94) 0%,
+    rgba(6, 6, 18, 0.96) 100%
+  ) !important;
+  backdrop-filter: blur(35px) saturate(1.35) !important;
+  -webkit-backdrop-filter: blur(35px) saturate(1.35) !important;
+  border-bottom: 1px solid rgba(255, 23, 68, 0.3) !important;
+  box-shadow:
+    0 0 45px rgba(255, 23, 68, 0.18),
+    0 5px 30px rgba(0, 0, 0, 0.65),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+}
+
+/* LED strip no header mais brilhante */
+.header::before {
+  height: 4px !important;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    #ff1744 15%,
+    #ff9100 35%,
+    #ffd700 50%,
+    #ff9100 65%,
+    #ff1744 85%,
+    transparent 100%
+  ) !important;
+  box-shadow:
+    0 0 15px rgba(255, 23, 68, 0.55),
+    0 0 35px rgba(255, 145, 0, 0.35) !important;
+  animation: ledStripGlow 2s ease-in-out infinite !important;
+}
+
+@keyframes ledStripGlow {
+  0%, 100% {
+    opacity: 0.55;
+    box-shadow: 0 0 10px rgba(255, 23, 68, 0.35), 0 0 22px rgba(255, 145, 0, 0.22);
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 22px rgba(255, 23, 68, 0.65), 0 0 45px rgba(255, 145, 0, 0.45);
+  }
+}
+
+/* ----------------------------------------------------------
+   3. EFEITOS DE INPUT (VIDRO FOSCO)
+   ---------------------------------------------------------- */
+
+.input {
+  background: linear-gradient(
+    145deg,
+    rgba(0, 0, 0, 0.4) 0%,
+    rgba(0, 0, 0, 0.28) 100%
+  ) !important;
+  border: 1px solid rgba(255, 23, 68, 0.18) !important;
+  box-shadow:
+    inset 0 2px 5px rgba(0, 0, 0, 0.35),
+    0 1px 0 rgba(255, 255, 255, 0.04) !important;
+}
+
+.input:focus {
+  background: linear-gradient(
+    145deg,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0.38) 100%
+  ) !important;
+  border-color: rgba(255, 23, 68, 0.55) !important;
+  box-shadow:
+    0 0 0 3px rgba(255, 23, 68, 0.1),
+    0 0 28px rgba(255, 23, 68, 0.18),
+    inset 0 2px 5px rgba(0, 0, 0, 0.45) !important;
+}
+
+/* ----------------------------------------------------------
+   4. SCANLINES E OVERLAY DIGITAL
+   ---------------------------------------------------------- */
+
+/* Scanlines adicionais aplicadas via body::after já cobrem
+   o efeito de painel digital junto com o circuito original.
+   A vignette escura nas bordas é aplicada via .container::before */
+
+/* ----------------------------------------------------------
+   5. BOTÕES COM EFEITO DE VIDRO + NEON
+   ---------------------------------------------------------- */
+
+.btn {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #ff1744, #ff9100) !important;
+  box-shadow:
+    0 5px 22px rgba(255, 23, 68, 0.4),
+    0 0 18px rgba(255, 23, 68, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22) !important;
+}
+
+/* Brilho de reflexo no botão */
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.25),
+    transparent
+  );
+  transition: left 0.55s ease;
+}
+
+.btn:hover::before {
+  left: 100%;
+}
+
+.btn:hover {
+  box-shadow:
+    0 10px 35px rgba(255, 23, 68, 0.55),
+    0 0 45px rgba(255, 23, 68, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28) !important;
+}
+
+/* ----------------------------------------------------------
+   6. TABELAS COM EFEITO DE PAINEL LED
+   ---------------------------------------------------------- */
+
+.table-wrapper {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.04) 0%,
+    rgba(255, 255, 255, 0.015) 100%
+  ) !important;
+  backdrop-filter: blur(18px) !important;
+  -webkit-backdrop-filter: blur(18px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow:
+    0 10px 35px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+}
+
+.table {
+  background: transparent !important;
+}
+
+.table th {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 23, 68, 0.22) 0%,
+    rgba(255, 145, 0, 0.16) 100%
+  ) !important;
+  border-bottom: 1px solid rgba(255, 23, 68, 0.35) !important;
+}
+
+/* ----------------------------------------------------------
+   7. PÓDIO COM VIDRO E REFLEXO
+   ---------------------------------------------------------- */
+
+.podio-card {
+  backdrop-filter: blur(22px) saturate(1.25) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(1.25) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow:
+    0 12px 45px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Reflexo de vidro nos cards do pódio */
+.podio-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    135deg,
+    transparent 42%,
+    rgba(255, 255, 255, 0.04) 47%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.04) 53%,
+    transparent 58%
+  );
+  pointer-events: none;
+  animation: glassGlare 9s ease-in-out infinite;
+}
+
+.podio-1 .podio-card {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 215, 0, 0.2) 0%,
+    rgba(255, 237, 78, 0.09) 50%,
+    rgba(255, 215, 0, 0.14) 100%
+  ) !important;
+  border: 1px solid rgba(255, 215, 0, 0.4) !important;
+  box-shadow:
+    0 0 45px rgba(255, 215, 0, 0.28),
+    0 12px 45px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+}
+
+.podio-2 .podio-card {
+  background: linear-gradient(
+    145deg,
+    rgba(192, 192, 192, 0.14) 0%,
+    rgba(229, 229, 229, 0.06) 50%,
+    rgba(192, 192, 192, 0.1) 100%
+  ) !important;
+  border: 1px solid rgba(192, 192, 192, 0.3) !important;
+  box-shadow:
+    0 0 35px rgba(192, 192, 192, 0.14),
+    0 12px 45px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+.podio-3 .podio-card {
+  background: linear-gradient(
+    145deg,
+    rgba(205, 127, 50, 0.14) 0%,
+    rgba(222, 184, 135, 0.06) 50%,
+    rgba(205, 127, 50, 0.1) 100%
+  ) !important;
+  border: 1px solid rgba(205, 127, 50, 0.3) !important;
+  box-shadow:
+    0 0 35px rgba(205, 127, 50, 0.14),
+    0 12px 45px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+/* ----------------------------------------------------------
+   8. STATS CARDS COM VIDRO
+   ---------------------------------------------------------- */
+
+.stat-card {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.06) 0%,
+    rgba(255, 255, 255, 0.025) 100%
+  ) !important;
+  backdrop-filter: blur(22px) saturate(1.1) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(1.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 16px !important;
+  box-shadow:
+    0 10px 35px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+}
+
+.stat-card:hover {
+  border-color: rgba(255, 23, 68, 0.3) !important;
+  box-shadow:
+    0 15px 45px rgba(0, 0, 0, 0.45),
+    0 0 35px rgba(255, 23, 68, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+/* ----------------------------------------------------------
+   9. RESPONSIVIDADE DOS EFEITOS
+   ---------------------------------------------------------- */
+
+@media (max-width: 575.98px) {
+  /* Reduzir intensidade dos LEDs em mobile */
+  html::before,
+  html::after,
+  body::after {
+    opacity: 0.45;
+  }
+
+  /* Desabilitar animação de glare em mobile para performance */
+  .glass-card::after,
+  .card::after,
+  .podio-card::before {
+    animation: none;
+  }
+
+  .glass-card,
+  .card {
+    backdrop-filter: blur(18px) saturate(1.1) !important;
+    -webkit-backdrop-filter: blur(18px) saturate(1.1) !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html::before,
+  html::after,
+  body::after,
+  .glass-card::after,
+  .card::after,
+  .podio-card::before {
+    animation: none;
+  }
+}
+

@@ -1,6 +1,7 @@
 /* F1 SYSTEM - VISUAL PREMIUM */
 
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap');
+@import url('effects.css');
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 

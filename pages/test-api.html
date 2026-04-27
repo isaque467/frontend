@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head><title>API Test</title></head>
+<body>
+  <h1>API Test</h1>
+  <div id="result"></div>
+  <script>
+    async function test() {
+      const result = document.getElementById('result');
+      try {
+        const res = await fetch('http://localhost:3000/dashboard');
+        const data = await res.json();
+        result.innerHTML = '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
+      } catch (e) {
+        result.innerHTML = '<p style="color:red">Error: ' + e.message + '</p>';
+      }
+    }
+    test();
+  </script>
+</body>
+</html>
+

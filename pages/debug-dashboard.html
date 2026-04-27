@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Debug Dashboard</title>
+  <style>
+    body { font-family: monospace; background: #111; color: #0f0; padding: 20px; }
+    .section { margin: 20px 0; padding: 10px; border: 1px solid #0f0; }
+    .error { color: #f00; }
+    .success { color: #0f0; }
+  </style>
+</head>
+<body>
+  <h1>Debug Dashboard API</h1>
+  <div id="logs"></div>
+
+  <script type="module">
+    import { apiRequest } from '../js/api.js';
+
+    const logs = document.getElementById('logs');
+
+    function log(msg, isError = false) {
+      const div = document.createElement('div');
+      div.className = isError ? 'error' : 'success';
+      div.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
+      logs.appendChild(div);
+    }
+
+    async function test() {
+      try {
+        log('Testando /dashboard...');
+        const dash = await apiRequest('/dashboard');
+        log('Dashboard OK: ' + JSON.stringify(dash));
+
+        const statsDiv = document.createElement('div');
+        statsDiv.className = 'section';
+        statsDiv.innerHTML = `
+          <h3>Estatísticas</h3>
+          <p>Usuários: ${dash.total_users}</p>
+          <p>Corredores: ${dash.total_corredores}</p>
+          <p>Voltas: ${dash.total_voltas}</p>
+          <p>Líder: ${dash.lider ? dash.lider.nome : 'Nenhum'}</p>
+        `;
+        document.body.appendChild(statsDiv);
+      } catch (e) {
+        log('Erro dashboard: ' + e.message, true);
+      }
+
+      try {
+        log('Testando /podio...');
+        const podio = await apiRequest('/podio');
+        log('Podio OK: ' + JSON.stringify(podio));
+
+        const podioDiv = document.createElement('div');
+        podioDiv.className = 'section';
+        podioDiv.innerHTML = `<h3>Pódio (${podio.length} posições)</h3>`;
+        podio.forEach((p, i) => {
+          podioDiv.innerHTML += `<p>${i+1}º: ${p.nome} (${p.equipe}) - ${p.tempo_total}</p>`;
+        });
+        document.body.appendChild(podioDiv);
+      } catch (e) {
+        log('Erro podio: ' + e.message, true);
+      }
+    }
+
+    test();
+  </script>
+</body>
+</html>
+

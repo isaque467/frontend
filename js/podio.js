@@ -12,7 +12,7 @@ async function loadPodio() {
 }
 
 function renderPodio(podio) {
-  if (podio.length === 0) {
+  if (!podio || podio.length === 0) {
     podioFull.innerHTML = '<div style="text-align: center; opacity: 0.7; font-size: 1.5rem;">⏳ Aguardando primeiras voltas...</div>';
     return;
   }
@@ -28,7 +28,7 @@ function renderPodio(podio) {
         <div class="podio-card">
           <div class="podio-posicao" style="font-size: 5rem;">${index + 1}</div>
           <div style="font-size: 1.8rem; margin: 1rem 0; font-weight: bold;">${pos.numero} - ${pos.nome}</div>
-          <div style="opacity: 0.9; margin-bottom: 1rem; font-size: 1.2rem;">${pos.equipe}</div>
+          <div style="opacity: 0.9; margin-bottom: 1rem; font-size: 1.2rem;">${pos.equipe || 'Sem turma'}</div>
           <div style="font-size: 1.6rem; font-weight: bold; margin-bottom: 0.5rem;">${formatTempo(pos.tempo_total)}</div>
           <div style="font-size: 1.1rem; opacity: 0.8;">Melhor: ${formatTempo(pos.melhor_volta)}</div>
         </div>
@@ -38,6 +38,16 @@ function renderPodio(podio) {
 }
 
 function formatTempo(tempo) {
+  if (!tempo) return '00:00.000';
+  if (typeof tempo === 'string') {
+    const parts = tempo.split(':');
+    if (parts.length === 3) {
+      const minutos = parseInt(parts[0]) * 60 + parseInt(parts[1]);
+      const segundos = parseInt(parts[2]);
+      return `${minutos}:${segundos.toString().padStart(2, '0')}.000`;
+    }
+    return tempo;
+  }
   const mins = Math.floor(tempo);
   const secs = Math.floor((tempo % 1) * 60);
   const ms = Math.round(((tempo % 1) * 60 % 1) * 1000);
@@ -47,3 +57,4 @@ function formatTempo(tempo) {
 // Auto update every 3s
 setInterval(loadPodio, 3000);
 loadPodio();
+
