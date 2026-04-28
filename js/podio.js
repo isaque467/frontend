@@ -18,19 +18,19 @@ function renderPodio(podio) {
   }
 
   const podiumPositions = ['🥇 PRIMEIRO', '🥈 SEGUNDO', '🥉 TERCEIRO'];
-  
+
   podioFull.innerHTML = podiumPositions.map((posName, index) => {
     const pos = podio[index];
     if (!pos) return '';
-    
+
     return `
       <div class="podio-pos ${index === 0 ? 'podio-1' : index === 1 ? 'podio-2' : 'podio-3'}" style="flex: 1;">
         <div class="podio-card">
-          <div class="podio-posicao" style="font-size: 5rem;">${index + 1}</div>
-          <div style="font-size: 1.8rem; margin: 1rem 0; font-weight: bold;">${pos.numero} - ${pos.nome}</div>
-          <div style="opacity: 0.9; margin-bottom: 1rem; font-size: 1.2rem;">${pos.equipe || 'Sem turma'}</div>
-          <div style="font-size: 1.6rem; font-weight: bold; margin-bottom: 0.5rem;">${formatTempo(pos.tempo_total)}</div>
-          <div style="font-size: 1.1rem; opacity: 0.8;">Melhor: ${formatTempo(pos.melhor_volta)}</div>
+          <div class="podio-posicao">${index + 1}</div>
+          <div class="podio-nome">${pos.numero} - ${pos.nome}</div>
+          <div class="podio-equipe">${pos.equipe || 'Sem turma'}</div>
+          <div class="podio-tempo">${formatTempo(pos.tempo_total)}</div>
+          <div class="podio-melhor">Melhor: ${formatTempo(pos.melhor_volta)}</div>
         </div>
       </div>
     `;

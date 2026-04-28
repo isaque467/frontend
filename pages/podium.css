@@ -1,6 +1,5 @@
 /* ============================================================
-   PODIUM DEFINITIVO - F1 Racing Podium
-   Design premium dedicado ao pódio
+   PODIUM PREMIUM - F1 Racing Podium Metallic Edition
    ============================================================ */
 
 /* ----------------------------------------------------------
@@ -20,20 +19,26 @@
 /* Remove pseudo-elementos conflitantes do base CSS */
 #podioFull .podio-pos::after,
 #podioDashboard .podio-pos::after {
-  display: none;
+  display: none !important;
 }
 
 /* ----------------------------------------------------------
    POSIÇÕES DO PÓDIO
    ---------------------------------------------------------- */
-.podio-pos.podio-1 { order: 2; transform: translateY(-60px); z-index: 30; }
-.podio-pos.podio-2 { order: 1; transform: translateY(20px);  z-index: 20; }
-.podio-pos.podio-3 { order: 3; transform: translateY(60px);  z-index: 10; }
+#podioFull .podio-pos.podio-1,
+#podioDashboard .podio-pos.podio-1 { order: 2; transform: translateY(-60px); z-index: 30; }
+
+#podioFull .podio-pos.podio-2,
+#podioDashboard .podio-pos.podio-2 { order: 1; transform: translateY(20px);  z-index: 20; }
+
+#podioFull .podio-pos.podio-3,
+#podioDashboard .podio-pos.podio-3 { order: 3; transform: translateY(60px);  z-index: 10; }
 
 /* ----------------------------------------------------------
    CARDS DO PÓDIO COM PEDESTAL INTEGRADO
    ---------------------------------------------------------- */
-.podio-card {
+#podioFull .podio-card,
+#podioDashboard .podio-card {
   position: relative;
   width: 260px;
   padding: 2.5rem 1.5rem 2rem;
@@ -47,7 +52,8 @@
 }
 
 /* Faixa de posição no topo */
-.podio-1 .podio-card::before {
+#podioFull .podio-1 .podio-card::before,
+#podioDashboard .podio-1 .podio-card::before {
   content: '1st Place';
   display: block;
   position: absolute;
@@ -63,7 +69,8 @@
   border-radius: 16px 16px 0 0;
 }
 
-.podio-2 .podio-card::before {
+#podioFull .podio-2 .podio-card::before,
+#podioDashboard .podio-2 .podio-card::before {
   content: '2nd Place';
   display: block;
   position: absolute;
@@ -79,7 +86,8 @@
   border-radius: 16px 16px 0 0;
 }
 
-.podio-3 .podio-card::before {
+#podioFull .podio-3 .podio-card::before,
+#podioDashboard .podio-3 .podio-card::before {
   content: '3rd Place';
   display: block;
   position: absolute;
@@ -96,7 +104,8 @@
 }
 
 /* Pedestal na base do card */
-.podio-1 .podio-card::after {
+#podioFull .podio-1 .podio-card::after,
+#podioDashboard .podio-1 .podio-card::after {
   content: '';
   position: absolute;
   bottom: -100px; left: 50%;
@@ -108,7 +117,8 @@
   box-shadow: 0 20px 40px rgba(255,215,0,0.3), 0 0 60px rgba(255,215,0,0.15), inset -20px 0 40px rgba(0,0,0,0.3), inset 20px 0 40px rgba(255,255,255,0.1);
 }
 
-.podio-2 .podio-card::after {
+#podioFull .podio-2 .podio-card::after,
+#podioDashboard .podio-2 .podio-card::after {
   content: '';
   position: absolute;
   bottom: -70px; left: 50%;
@@ -120,7 +130,8 @@
   box-shadow: 0 15px 35px rgba(192,192,192,0.2), 0 0 40px rgba(192,192,192,0.1), inset -15px 0 30px rgba(0,0,0,0.3), inset 15px 0 30px rgba(255,255,255,0.1);
 }
 
-.podio-3 .podio-card::after {
+#podioFull .podio-3 .podio-card::after,
+#podioDashboard .podio-3 .podio-card::after {
   content: '';
   position: absolute;
   bottom: -40px; left: 50%;
@@ -133,7 +144,8 @@
 }
 
 /* Cores dos cards */
-.podio-1 .podio-card {
+#podioFull .podio-1 .podio-card,
+#podioDashboard .podio-1 .podio-card {
   background: linear-gradient(165deg, rgba(255,215,0,0.15), rgba(184,134,11,0.1), rgba(139,105,20,0.12));
   border: 2px solid rgba(255,215,0,0.3);
   border-bottom: none;
@@ -141,14 +153,16 @@
   transform: scale(1.12);
 }
 
-.podio-2 .podio-card {
+#podioFull .podio-2 .podio-card,
+#podioDashboard .podio-2 .podio-card {
   background: linear-gradient(165deg, rgba(192,192,192,0.1), rgba(128,128,128,0.06), rgba(64,64,64,0.1));
   border: 2px solid rgba(192,192,192,0.2);
   border-bottom: none;
   box-shadow: 0 0 30px rgba(192,192,192,0.1), 0 15px 50px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1);
 }
 
-.podio-3 .podio-card {
+#podioFull .podio-3 .podio-card,
+#podioDashboard .podio-3 .podio-card {
   background: linear-gradient(165deg, rgba(205,127,50,0.1), rgba(139,69,19,0.06), rgba(92,46,12,0.08));
   border: 2px solid rgba(205,127,50,0.2);
   border-bottom: none;
@@ -156,14 +170,18 @@
 }
 
 /* Hover */
-.podio-1 .podio-card:hover { transform: scale(1.16) translateY(-8px); box-shadow: 0 0 70px rgba(255,215,0,0.25), 0 30px 70px rgba(0,0,0,0.6); }
-.podio-2 .podio-card:hover { transform: scale(1.04) translateY(-5px); }
-.podio-3 .podio-card:hover { transform: scale(0.98) translateY(-5px); }
+#podioFull .podio-1 .podio-card:hover,
+#podioDashboard .podio-1 .podio-card:hover { transform: scale(1.16) translateY(-8px); box-shadow: 0 0 70px rgba(255,215,0,0.25), 0 30px 70px rgba(0,0,0,0.6); }
+#podioFull .podio-2 .podio-card:hover,
+#podioDashboard .podio-2 .podio-card:hover { transform: scale(1.04) translateY(-5px); }
+#podioFull .podio-3 .podio-card:hover,
+#podioDashboard .podio-3 .podio-card:hover { transform: scale(0.98) translateY(-5px); }
 
 /* ----------------------------------------------------------
    NÚMERO DA POSIÇÃO
    ---------------------------------------------------------- */
-.podio-posicao {
+#podioFull .podio-posicao,
+#podioDashboard .podio-posicao {
   font-family: 'Orbitron', sans-serif;
   font-size: 4rem;
   font-weight: 900;
@@ -171,19 +189,22 @@
   margin: 1.2rem 0 0.5rem;
 }
 
-.podio-1 .podio-posicao {
+#podioFull .podio-1 .podio-posicao,
+#podioDashboard .podio-1 .podio-posicao {
   font-size: 5.5rem;
   color: #ffd700;
   text-shadow: 0 0 20px rgba(255,215,0,0.6), 0 0 40px rgba(255,215,0,0.3), 0 2px 4px rgba(0,0,0,0.8);
 }
 
-.podio-2 .podio-posicao {
+#podioFull .podio-2 .podio-posicao,
+#podioDashboard .podio-2 .podio-posicao {
   font-size: 4.5rem;
   color: #e0e0e0;
   text-shadow: 0 0 15px rgba(192,192,192,0.5), 0 0 30px rgba(192,192,192,0.2), 0 2px 4px rgba(0,0,0,0.8);
 }
 
-.podio-3 .podio-posicao {
+#podioFull .podio-3 .podio-posicao,
+#podioDashboard .podio-3 .podio-posicao {
   font-size: 4rem;
   color: #daa520;
   text-shadow: 0 0 15px rgba(205,127,50,0.5), 0 0 30px rgba(205,127,50,0.2), 0 2px 4px rgba(0,0,0,0.8);
@@ -192,7 +213,8 @@
 /* ----------------------------------------------------------
    MEDALHA AO LADO DO NÚMERO
    ---------------------------------------------------------- */
-.podio-posicao::after {
+#podioFull .podio-posicao::after,
+#podioDashboard .podio-posicao::after {
   content: '';
   display: inline-block;
   width: 22px; height: 22px;
@@ -201,17 +223,20 @@
   vertical-align: middle;
 }
 
-.podio-1 .podio-posicao::after {
+#podioFull .podio-1 .podio-posicao::after,
+#podioDashboard .podio-1 .podio-posicao::after {
   background: radial-gradient(circle at 35% 35%, #ffec8b, #ffd700, #b8860b);
   box-shadow: 0 0 12px rgba(255,215,0,0.5), inset 0 2px 3px rgba(255,255,255,0.5), inset 0 -2px 3px rgba(0,0,0,0.5);
 }
 
-.podio-2 .podio-posicao::after {
+#podioFull .podio-2 .podio-posicao::after,
+#podioDashboard .podio-2 .podio-posicao::after {
   background: radial-gradient(circle at 35% 35%, #f0f0f0, #c0c0c0, #808080);
   box-shadow: 0 0 10px rgba(192,192,192,0.4), inset 0 2px 3px rgba(255,255,255,0.4), inset 0 -2px 3px rgba(0,0,0,0.4);
 }
 
-.podio-3 .podio-posicao::after {
+#podioFull .podio-3 .podio-posicao::after,
+#podioDashboard .podio-3 .podio-posicao::after {
   background: radial-gradient(circle at 35% 35%, #daa520, #cd7f32, #8b4513);
   box-shadow: 0 0 10px rgba(205,127,50,0.4), inset 0 2px 3px rgba(255,255,255,0.3), inset 0 -2px 3px rgba(0,0,0,0.4);
 }
@@ -219,7 +244,8 @@
 /* ----------------------------------------------------------
    NOME DO CORREDOR
    ---------------------------------------------------------- */
-.podio-card div:nth-child(2) {
+#podioFull .podio-card .podio-nome,
+#podioDashboard .podio-card .podio-nome {
   font-family: 'Orbitron', sans-serif;
   font-size: 1.3rem !important;
   font-weight: 700;
@@ -232,7 +258,8 @@
 /* ----------------------------------------------------------
    EQUIPE
    ---------------------------------------------------------- */
-.podio-card div:nth-child(3) {
+#podioFull .podio-card .podio-equipe,
+#podioDashboard .podio-card .podio-equipe {
   font-family: 'Rajdhani', sans-serif;
   font-size: 1rem !important;
   font-weight: 600;
@@ -245,7 +272,8 @@
 /* ----------------------------------------------------------
    TEMPO TOTAL (estilo display digital)
    ---------------------------------------------------------- */
-.podio-card div:nth-child(4) {
+#podioFull .podio-card .podio-tempo,
+#podioDashboard .podio-card .podio-tempo {
   font-family: 'Orbitron', monospace;
   font-size: 1.6rem !important;
   font-weight: 700;
@@ -262,7 +290,8 @@
 /* ----------------------------------------------------------
    MELHOR VOLTA
    ---------------------------------------------------------- */
-.podio-card div:nth-child(5) {
+#podioFull .podio-card .podio-melhor,
+#podioDashboard .podio-card .podio-melhor {
   font-family: 'Orbitron', monospace;
   font-size: 0.85rem !important;
   color: #ff9100;
@@ -283,27 +312,39 @@
     padding-bottom: 60px;
   }
 
-  .podio-pos.podio-1,
-  .podio-pos.podio-2,
-  .podio-pos.podio-3 {
+  #podioFull .podio-pos.podio-1,
+  #podioDashboard .podio-pos.podio-1,
+  #podioFull .podio-pos.podio-2,
+  #podioDashboard .podio-pos.podio-2,
+  #podioFull .podio-pos.podio-3,
+  #podioDashboard .podio-pos.podio-3 {
     transform: none;
     order: initial;
   }
 
-  .podio-pos.podio-1 { transform: scale(1.05); }
+  #podioFull .podio-pos.podio-1,
+  #podioDashboard .podio-pos.podio-1 { transform: scale(1.05); }
 
-  .podio-card {
+  #podioFull .podio-card,
+  #podioDashboard .podio-card {
     width: 280px;
     max-width: 90vw;
   }
 
-  .podio-1 .podio-card::after,
-  .podio-2 .podio-card::after,
-  .podio-3 .podio-card::after {
+  #podioFull .podio-1 .podio-card::after,
+  #podioDashboard .podio-1 .podio-card::after,
+  #podioFull .podio-2 .podio-card::after,
+  #podioDashboard .podio-2 .podio-card::after,
+  #podioFull .podio-3 .podio-card::after,
+  #podioDashboard .podio-3 .podio-card::after {
     display: none;
   }
 
-  .podio-posicao { font-size: 3rem; }
-  .podio-1 .podio-posicao { font-size: 3.5rem; }
-  .podio-2 .podio-posicao { font-size: 3rem; }
+  #podioFull .podio-posicao,
+  #podioDashboard .podio-posicao { font-size: 3rem; }
+  #podioFull .podio-1 .podio-posicao,
+  #podioDashboard .podio-1 .podio-posicao { font-size: 3.5rem; }
+  #podioFull .podio-2 .podio-posicao,
+  #podioDashboard .podio-2 .podio-posicao { font-size: 3rem; }
 }
+

@@ -56,7 +56,7 @@ function renderStats(data) {
 
 function renderPodioDashboard(podio) {
   let html = '<h2 style="text-align: center; margin-bottom: 2rem; color: #ff9100;">🏆 Pódio Atual</h2>';
-  
+
   if (!podio || podio.length === 0) {
     html += '<div style="text-align: center; opacity: 0.7;">Nenhuma volta registrada ainda</div>';
   } else {
@@ -68,10 +68,10 @@ function renderPodioDashboard(podio) {
             <div class="${posClass}">
               <div class="podio-card">
                 <div class="podio-posicao">${index + 1}º</div>
-                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">${pos.numero} - ${pos.nome}</div>
-                <div style="opacity: 0.8; margin-bottom: 1rem;">${pos.equipe || 'Sem turma'}</div>
-                <div style="font-size: 1.2rem; font-weight: bold;">${formatTempo(pos.tempo_total)}</div>
-                <div style="opacity: 0.7; font-size: 0.9rem;">Melhor: ${formatTempo(pos.melhor_volta)}</div>
+                <div class="podio-nome">${pos.numero} - ${pos.nome}</div>
+                <div class="podio-equipe">${pos.equipe || 'Sem turma'}</div>
+                <div class="podio-tempo">${formatTempo(pos.tempo_total)}</div>
+                <div class="podio-melhor">Melhor: ${formatTempo(pos.melhor_volta)}</div>
               </div>
             </div>
           `;
@@ -79,7 +79,7 @@ function renderPodioDashboard(podio) {
       </div>
     `;
   }
-  
+
   podioDashboard.innerHTML = html;
 }
 
