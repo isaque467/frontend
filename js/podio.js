@@ -1,6 +1,6 @@
 import { apiRequest } from './api.js';
 
-const podioFull = document.getElementById('podioFull');
+const podioFull = document.getElementById('podioFull') || document.getElementById('podioDashboard');
 
 async function loadPodio() {
   try {

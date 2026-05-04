@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ranking - F1 System</title>
   <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <header class="header">
@@ -24,19 +24,45 @@
   </header>
 
   <div class="container">
-    <h1 style="text-align: center; margin: 2rem 0; font-size: 3rem; background: linear-gradient(45deg, #ff1744, #ff9100); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-      🏆 Ranking Geral
-    </h1>
-    
-    <div class="card" style="margin-bottom: 2rem;">
-      <div id="rankingTable">
-        Carregando ranking...
-      </div>
+    <h1 class="page-title">🏆 Ranking Geral</h1>
+    <div class="table-wrapper">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Pos</th>
+            <th>#</th>
+            <th>Piloto</th>
+            <th>Equipe</th>
+            <th>Total Voltas</th>
+            <th>Melhor Tempo</th>
+            <th>Pontos</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>#7</td>
+            <td>Isaque Silva</td>
+            <td>Alpha</td>
+            <td>89</td>
+            <td>1:28.123</td>
+            <td>250</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>#12</td>
+            <td>João Santos</td>
+            <td>Beta</td>
+            <td>76</td>
+            <td>1:28.456</td>
+            <td>198</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 
-  <script type="module" src="../js/ranking.js"></script>
+  <script>function logout(){localStorage.removeItem('f1_user');window.location.href='login.html'}</script>
 </body>
 </html>
 
-<script>function logout(){localStorage.removeItem('f1_user');window.location.href='login.html'}</script>

@@ -1,0 +1,16 @@
+{
+  "name": "F1 System Dashboard",
+  "short_name": "F1 Dashboard",
+  "description": "Sistema de Corridas F1 Ultra-Visual",
+  "start_url": "/pages/dashboard.html",
+  "display": "standalone",
+  "background_color": "#050508",
+  "theme_color": "#ff1744",
+  "icons": [
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiBmaWxsPSIjRkYxNzQ0Ii8+CjxwYXRoIGQ9Ik0xMiA1MiBMOTYgMTI0IE18MCAxMjQgTDEyIDUyWiIgZmlsbD0iI0ZGRkZGRiIvPgo8L3N2Zz4K",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    }
+  ]
+}

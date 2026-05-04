@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Registro Voltas - F1 System</title>
   <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <header class="header">
@@ -24,45 +24,51 @@
   </header>
 
   <div class="container">
-    <div class="card" style="max-width: 700px; margin: 3rem auto;">
-      <h1 style="text-align: center; background: linear-gradient(45deg, #ff1744, #ff9100); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-        ⏱️ Registro de Voltas
-      </h1>
-      
-      <form id="voltaForm">
+    <h1 class="page-title">⏱️ Registro de Voltas</h1>
+    <div class="glass-card">
+      <form class="form-section">
         <div class="form-group">
           <label class="label">Corredor</label>
-          <select id="corredor_id" class="input" required>
-            <option value="">Selecionar...</option>
+          <select class="input">
+            <option>#7 - Isaque Silva</option>
+            <option>#12 - João Santos</option>
           </select>
         </div>
-        
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-          <div class="form-group">
-            <label class="label">Nº da Volta</label>
-            <input type="number" id="numero_volta" class="input" required>
-          </div>
-          
-          <div class="form-group">
-            <label class="label">Tempo (minutos.decimal)</label>
-            <input type="number" step="0.001" id="tempo_volta" class="input" placeholder="1.234" required>
-          </div>
+        <div class="form-group">
+          <label class="label">Tempo Volta</label>
+          <input type="text" class="input" placeholder="MM:SS.mmm ex: 01:28.456">
         </div>
-        
-        <button type="submit" class="btn" style="width: 100%;">Registrar Volta 🏁</button>
+        <div class="form-group">
+          <label class="label">Volta #</label>
+          <input type="number" class="input" placeholder="1">
+        </div>
+        <button type="submit" class="btn">Registrar Volta 🏁</button>
       </form>
-      
-      <div id="voltaMessage" style="margin-top: 1rem; text-align: center;"></div>
-    </div>
 
-    <div class="card">
-      <h2 style="color: #ff9100; margin-bottom: 1.5rem;">Últimas Voltas</h2>
-      <div id="ultimasVoltas">Carregando...</div>
+      <div class="table-wrapper mt-2">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Corredor</th>
+              <th>Volta</th>
+              <th>Tempo</th>
+              <th>Data</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>#7 Isaque</td>
+              <td>1</td>
+              <td>1:28.456</td>
+              <td>2024-01-15</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 
-  <script type="module" src="../js/voltas.js"></script>
+  <script>function logout(){localStorage.removeItem('f1_user');window.location.href='login.html'}</script>
 </body>
 </html>
 
-<script>function logout(){localStorage.removeItem('f1_user');window.location.href='login.html'}</script>

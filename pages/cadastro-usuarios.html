@@ -3,81 +3,75 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cadastro Usuários - F1 System</title>
+  <title>Usuários - F1 System</title>
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
-
   <header class="header">
     <nav class="nav">
       <div class="logo">🏎️ F1 SYSTEM</div>
-      <button class="hamburger" id="hamburgerBtn" aria-label="Menu" aria-expanded="false" onclick="toggleMenu()">☰</button>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="cadastro-corredores.html" onclick="closeMenu()">🏁 Corredores</a></li>
+      <ul class="nav-links">
+        <li><a href="dashboard.html">📊 Dashboard</a></li>
+        <li><a href="cadastro-usuarios.html">👤 Usuários</a></li>
+        <li><a href="cadastro-corredores.html">🏁 Corredores</a></li>
+        <li><a href="registro-voltas.html">⏱️ Voltas</a></li>
+        <li><a href="ranking.html">🏆 Ranking</a></li>
+        <li><a href="podio.html">🥇 Pódio</a></li>
+        <li><a href="#" onclick="logout()">🚪 Sair</a></li>
       </ul>
     </nav>
   </header>
 
   <div class="container">
-    <div class="glass-card" style="max-width: 600px; margin: 3rem auto;">
-      <h1 class="page-title" style="font-size: 1.8rem; margin-bottom: 2rem;">👤 Cadastro de Usuários</h1>
-      
-      <form id="userForm">
+    <h1 class="page-title">👤 Gerenciar Usuários</h1>
+    <div class="glass-card">
+      <form class="form-section">
         <div class="form-group">
-          <label class="label">Nome Completo</label>
-          <input type="text" id="nome" class="input" placeholder="Digite o nome completo" required>
+          <label class="label">Nome</label>
+          <input type="text" class="input" placeholder="Nome completo">
         </div>
-        
         <div class="form-group">
           <label class="label">Email</label>
-          <input type="email" id="email" class="input" placeholder="exemplo@email.com" required>
+          <input type="email" class="input" placeholder="email@exemplo.com">
         </div>
-        
         <div class="form-group">
-          <label class="label">Senha</label>
-          <input type="password" id="senha" class="input" placeholder="Mínimo 6 caracteres" required>
+          <label class="label">Cargo</label>
+          <select class="input">
+            <option>Administrador</option>
+            <option>Equipe</option>
+            <option>Corredor</option>
+          </select>
         </div>
-        
-        <button type="submit" class="btn w-full">Criar Usuário 🆕</button>
+        <button type="submit" class="btn">Adicionar Usuário 🚀</button>
       </form>
-      
-      <div id="userMessage" class="mt-1 text-center"></div>
+
+      <div class="table-wrapper mt-2">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Email</th>
+              <th>Cargo</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>#001</td>
+              <td>Demo User</td>
+              <td>demo@f1.com</td>
+              <td>Admin</td>
+              <td><button class="btn" style="padding: 0.5rem 1rem; font-size: 0.75rem;">Editar</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 
-  <script type="module" src="../js/usuarios.js"></script>
-  <script>
-    function logout() {
-      localStorage.removeItem('f1_user');
-      window.location.href = 'login.html';
-    }
-
-    function toggleMenu() {
-      const nav = document.getElementById('navLinks');
-      const overlay = document.getElementById('menuOverlay');
-      const btn = document.getElementById('hamburgerBtn');
-      const isOpen = nav.classList.toggle('active');
-      overlay.classList.toggle('active', isOpen);
-      btn.setAttribute('aria-expanded', isOpen);
-      btn.textContent = isOpen ? '✕' : '☰';
-      document.body.style.overflow = isOpen ? 'hidden' : '';
-    }
-
-    function closeMenu() {
-      const nav = document.getElementById('navLinks');
-      const overlay = document.getElementById('menuOverlay');
-      const btn = document.getElementById('hamburgerBtn');
-      nav.classList.remove('active');
-      overlay.classList.remove('active');
-      btn.setAttribute('aria-expanded', 'false');
-      btn.textContent = '☰';
-      document.body.style.overflow = '';
-    }
-
-    window.addEventListener('resize', () => {
-      if (window.innerWidth > 575.98) closeMenu();
-    });
-  </script>
+  <script>function logout(){localStorage.removeItem('f1_user');window.location.href='login.html'}</script>
 </body>
 </html>
+

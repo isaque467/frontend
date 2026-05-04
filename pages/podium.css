@@ -1,10 +1,74 @@
 /* ============================================================
    PODIUM PREMIUM - F1 Racing Podium Metallic Edition
+   CSS Variables + Isolated Selectors + Animations
    ============================================================ */
 
-/* ----------------------------------------------------------
+:root {
+  /* Cores Metálicas F1 */
+  --f1-gold: #ffd700;
+  --f1-gold-light: #ffec8b;
+  --f1-gold-dark: #b8860b;
+  --f1-gold-deep: #8b6914;
+  --f1-gold-shadow: #5c4400;
+
+  --f1-silver: #c0c0c0;
+  --f1-silver-light: #e8e8e8;
+  --f1-silver-mid: #a9a9a9;
+  --f1-silver-dark: #808080;
+  --f1-silver-deep: #696969;
+  --f1-silver-shadow: #404040;
+
+  --f1-bronze: #cd7f32;
+  --f1-bronze-light: #daa520;
+  --f1-bronze-mid: #b87333;
+  --f1-bronze-dark: #8b4513;
+  --f1-bronze-shadow: #5c2e0c;
+
+  --f1-red: #ff1744;
+  --f1-orange: #ff9100;
+  --f1-green: #4ade80;
+
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+}
+
+/* ================================================================
+   SKELETON LOADING
+   ================================================================ */
+.podium-skeleton {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 1.5rem;
+  min-height: 520px;
+  padding: 0 1rem 120px;
+}
+
+.podium-skeleton .skeleton-card {
+  width: 260px;
+  border-radius: 16px 16px 4px 4px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.03) 25%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.03) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.5s infinite;
+}
+
+.podium-skeleton .skeleton-card:nth-child(1) { height: 380px; }
+.podium-skeleton .skeleton-card:nth-child(2) { height: 320px; }
+.podium-skeleton .skeleton-card:nth-child(3) { height: 280px; }
+
+@keyframes skeletonShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ================================================================
    CONTAINER DO PÓDIO
-   ---------------------------------------------------------- */
+   ================================================================ */
 #podioFull.podio,
 #podioDashboard.podio {
   display: flex;
@@ -22,119 +86,55 @@
   display: none !important;
 }
 
-/* ----------------------------------------------------------
+/* ================================================================
+   ANIMAÇÃO DE ENTRADA
+   ================================================================ */
+@keyframes podiumFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(var(--podio-y, 0)) scale(var(--podio-scale, 1));
+  }
+}
+
+#podioFull .podio-pos,
+#podioDashboard .podio-pos {
+  animation: podiumFadeIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  opacity: 0;
+}
+
+#podioFull .podio-pos:nth-child(1),
+#podioDashboard .podio-pos:nth-child(1) { animation-delay: 0.1s; }
+#podioFull .podio-pos:nth-child(2),
+#podioDashboard .podio-pos:nth-child(2) { animation-delay: 0.25s; }
+#podioFull .podio-pos:nth-child(3),
+#podioDashboard .podio-pos:nth-child(3) { animation-delay: 0.4s; }
+
+/* ================================================================
    POSIÇÕES DO PÓDIO
-   ---------------------------------------------------------- */
+   ================================================================ */
 #podioFull .podio-pos.podio-1,
-#podioDashboard .podio-pos.podio-1 { order: 2; transform: translateY(-60px); z-index: 30; }
+#podioDashboard .podio-pos.podio-1 {
+  order: 2;
+  transform: translateY(-60px);
+  z-index: 30;
+  --podio-y: -60px;
+  --podio-scale: 1.12;
+}
 
 #podioFull .podio-pos.podio-2,
-#podioDashboard .podio-pos.podio-2 { order: 1; transform: translateY(20px);  z-index: 20; }
+#podioDashboard .podio-pos.podio-2 {
+  order: 1;
+  transform: translateY(20px);
+  z-index: 20;
+  --podio-y: 20px;
+  --podio-scale: 1;
+}
 
 #podioFull .podio-pos.podio-3,
-#podioDashboard .podio-pos.podio-3 { order: 3; transform: translateY(60px);  z-index: 10; }
-
-/* ----------------------------------------------------------
-   CARDS DO PÓDIO COM PEDESTAL INTEGRADO
-   ---------------------------------------------------------- */
-#podioFull .podio-card,
-#podioDashboard .podio-card {
-  position: relative;
-  width: 260px;
-  padding: 2.5rem 1.5rem 2rem;
-  border-radius: 16px 16px 4px 4px;
-  text-align: center;
-  backdrop-filter: blur(20px) saturate(1.3);
-  -webkit-backdrop-filter: blur(20px) saturate(1.3);
-  border: none;
-  overflow: visible;
-  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-/* Faixa de posição no topo */
-#podioFull .podio-1 .podio-card::before,
-#podioDashboard .podio-1 .podio-card::before {
-  content: '1st Place';
-  display: block;
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  padding: 5px 0;
-  font-family: 'Orbitron', sans-serif;
-  font-size: 0.6rem;
-  font-weight: 700;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: #000;
-  background: linear-gradient(90deg, #ffd700, #ffec8b, #ffd700);
-  border-radius: 16px 16px 0 0;
-}
-
-#podioFull .podio-2 .podio-card::before,
-#podioDashboard .podio-2 .podio-card::before {
-  content: '2nd Place';
-  display: block;
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  padding: 5px 0;
-  font-family: 'Orbitron', sans-serif;
-  font-size: 0.6rem;
-  font-weight: 700;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: #000;
-  background: linear-gradient(90deg, #c0c0c0, #e8e8e8, #c0c0c0);
-  border-radius: 16px 16px 0 0;
-}
-
-#podioFull .podio-3 .podio-card::before,
-#podioDashboard .podio-3 .podio-card::before {
-  content: '3rd Place';
-  display: block;
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  padding: 5px 0;
-  font-family: 'Orbitron', sans-serif;
-  font-size: 0.6rem;
-  font-weight: 700;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: #000;
-  background: linear-gradient(90deg, #cd7f32, #daa520, #cd7f32);
-  border-radius: 16px 16px 0 0;
-}
-
-/* Pedestal na base do card */
-#podioFull .podio-1 .podio-card::after,
-#podioDashboard .podio-1 .podio-card::after {
-  content: '';
-  position: absolute;
-  bottom: -100px; left: 50%;
-  transform: translateX(-50%);
-  width: 100%; height: 100px;
-  border-radius: 4px 4px 8px 8px;
-  z-index: -1;
-  background: linear-gradient(180deg, #b8860b, #ffd700 25%, #daa520 50%, #8b6914 75%, #5c4400);
-  box-shadow: 0 20px 40px rgba(255,215,0,0.3), 0 0 60px rgba(255,215,0,0.15), inset -20px 0 40px rgba(0,0,0,0.3), inset 20px 0 40px rgba(255,255,255,0.1);
-}
-
-#podioFull .podio-2 .podio-card::after,
-#podioDashboard .podio-2 .podio-card::after {
-  content: '';
-  position: absolute;
-  bottom: -70px; left: 50%;
-  transform: translateX(-50%);
-  width: 100%; height: 70px;
-  border-radius: 4px 4px 8px 8px;
-  z-index: -1;
-  background: linear-gradient(180deg, #808080, #c0c0c0 25%, #a9a9a9 50%, #696969 75%, #404040);
-  box-shadow: 0 15px 35px rgba(192,192,192,0.2), 0 0 40px rgba(192,192,192,0.1), inset -15px 0 30px rgba(0,0,0,0.3), inset 15px 0 30px rgba(255,255,255,0.1);
-}
-
-#podioFull .podio-3 .podio-card::after,
-#podioDashboard .podio-3 .podio-card::after {
-  content: '';
-  position: absolute;
-  bottom: -40px; left: 50%;
   transform: translateX(-50%);
   width: 100%; height: 40px;
   border-radius: 4px 4px 8px 8px;

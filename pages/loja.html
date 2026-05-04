@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loja F1 System 🛒</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <nav class="nav">
+      <div class="logo">🏎️ F1 SYSTEM</div>
+      <ul class="nav-links">
+        <li><a href="dashboard.html">📊 Dashboard</a></li>
+        <li><a href="cadastro-usuarios.html">👤 Usuários</a></li>
+        <li><a href="cadastro-corredores.html">🏁 Corredores</a></li>
+        <li><a href="podio.html">🥇 Pódio</a></li>
+        <li><a href="loja.html">🛒 Loja</a></li>
+        <li><a href="#" onclick="logout()">🚪 Sair</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h1 class="page-title">Loja F1 System 🏎️🛒</h1>
+    
+    <div class="stats-grid">
+      <div class="card stat-card">
+        <div class="stat-number" id="carrinho-count">0</div>
+        <div>🛒 Itens</div>
+      </div>
+      <div class="card stat-card">
+        <div class="stat-number" id="total-price">R$ 0,00</div>
+        <div>💰 Total</div>
+      </div>
+    </div>
+
+    <div id="produtos-grid" class="stats-grid">
+      <!-- Produtos carregados via JS -->
+    </div>
+
+    <div class="led-divider"></div>
+    
+    <button class="btn" onclick="checkout()" style="margin: 2rem auto; display: block;">Finalizar Compra ➡️</button>
+  </div>
+
+  <script type="module" src="../js/loja.js"></script>
+  <script type="module" src="../js/theme-toggle.js"></script>
+</body>
+</html>
+
+<script>function logout(){localStorage.removeItem('f1_user');window.location.href='login.html'}</script>
+
