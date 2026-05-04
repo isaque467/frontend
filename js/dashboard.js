@@ -14,8 +14,16 @@ if (!localStorage.getItem('f1_user')) {
 // Carregar dashboard
 async function loadDashboard() {
   try {
-    const statsData = await apiRequest('/dashboard');
-    const podioData = await apiRequest('/podio');
+let statsData, podioData;
+    try {
+      statsData = await apiRequest('/dashboard');
+      podioData = await apiRequest('/podio');
+    } catch {
+      const { mockDashboard, mockPodio } = await import('./mock-data.js');
+      statsData = mockDashboard;
+      podioData = mockPodio;
+      console.log('🔥 MOCK DATA ativado - Backend offline');
+    }
     
     renderStats(statsData);
     renderPodioDashboard(podioData);

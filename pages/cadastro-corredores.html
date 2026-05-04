@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Corredores - F1 System</title>
   <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
 </head>
+
 <body>
   <header class="header">
     <nav class="nav">
@@ -28,13 +32,13 @@
     <div class="glass-card">
       <form class="form-section">
         <div class="form-group">
+          <label class="label">Nome Piloto</label>
+          <input type="text" class="input" placeholder="Nome do corredor">
+        </div><div class="form-group">
           <label class="label">Número</label>
           <input type="number" class="input" placeholder="#7">
         </div>
-        <div class="form-group">
-          <label class="label">Nome Piloto</label>
-          <input type="text" class="input" placeholder="Nome do corredor">
-        </div>
+        
         <div class="form-group">
           <label class="label">Equipe</label>
           <input type="text" class="input" placeholder="Equipe/Turma">
@@ -53,19 +57,13 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>#7</td>
-              <td>Isaque Silva</td>
-              <td>Alpha</td>
-              <td><button class="btn" style="padding: 0.5rem 1rem; font-size: 0.75rem;">Editar</button></td>
-            </tr>
           </tbody>
         </table>
       </div>
     </div>
   </div>
 
-  <script>function logout(){localStorage.removeItem('f1_user');window.location.href='login.html'}</script>
+  <script>function logout() { localStorage.removeItem('f1_user'); window.location.href = 'login.html' }</script>
 </body>
-</html>
 
+</html>
